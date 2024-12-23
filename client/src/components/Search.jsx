@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { TypeAnimation } from "react-type-animation";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -6,10 +6,18 @@ import { useNavigate, useLocation } from "react-router-dom";
 const Search = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log("location: ", location)
+  const [isSearchPage,setSearchPage] = useState(false)
+  
+  useEffect(()=>{
+      const isSearch = location.pathname === "/search"
+      setSearchPage(isSearch)
+  },[location])
+
   const redirectToSearchPage = () => {
     navigate("/search");
   };
+
+  console.log("search", isSearchPage)
 
   return (
     <div
