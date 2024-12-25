@@ -1,6 +1,7 @@
 node_modules/
 .env
 package-lock.json
+BlinkIt-Clone-Full-Stack-Ecommerce
 
 # Logs
 logs
