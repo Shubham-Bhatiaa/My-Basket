@@ -1,14 +1,19 @@
 import React from "react";
 import logo from "../assets/logo.png";
 import Search from "./Search";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 import useMobile from "../hooks/useMobile";
+import { TiShoppingCart } from "react-icons/ti";
 
 const Header = () => {
   const [isMobile] = useMobile();
   const location = useLocation();
   const isSearchPage = location.pathname === "/search";
+  const navigate = useNavigate
+  const redirectToLoginPage=()=>{
+    navigate("/Login")
+  }
 
   return (
     <header className="h-24 lg:h-20 shadow-md sticky top-0 flex flex-col gap-2 items-center justify-center">
@@ -19,8 +24,8 @@ const Header = () => {
             <Link to={"/"} className="h-full flex items-center justify-center">
               <img
                 src={logo}
-                width={170}
-                height={60}
+                width={250}
+                height={50}
                 alt="logo"
                 className="hidden lg:block"
               />
@@ -40,10 +45,24 @@ const Header = () => {
           </div>
           {/**login and my cart */}
           <div className="">
+            {/* user icon display only in mobile version */}
             <button className="lg:hidden text-zinc-600">
               <FaRegUser size={18} />
             </button>
-            <div className="hidden lg:block">cart and login</div>
+
+            {/* desktop version shows cart and login */}
+            <div className="hidden lg:flex items-center gap-10">
+              <button onClick={redirectToLoginPage} className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-md px-8 py-3 font-bold">Login</button>
+              <button className="flex items-center gap-2 bg-green-600 hover:bg-green-700 rounded-md px-3 py-3 text-white font-bold">
+                {/* add to cart icon */}
+                <div className="animate-bounce ">
+                  <TiShoppingCart size={24} />
+                </div>
+                <div>
+                 <p>My Cart</p>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       )}
