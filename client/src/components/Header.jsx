@@ -10,13 +10,13 @@ const Header = () => {
   const [isMobile] = useMobile();
   const location = useLocation();
   const isSearchPage = location.pathname === "/search";
-  const navigate = useNavigate
+  const navigate = useNavigate()
   const redirectToLoginPage=()=>{
-    navigate("/Login")
+    navigate("/login")
   }
-
+  
   return (
-    <header className="h-24 lg:h-20 shadow-md sticky top-0 flex flex-col gap-2 items-center justify-center">
+    <header className="h-24 lg:h-20 shadow-md sticky top-0 flex flex-col gap-2 items-center justify-center bg-white">
       {!(isSearchPage && isMobile) && (
         <div className="container mx-auto justify-between flex items-center px-2">
           {/**logo */}
@@ -24,7 +24,7 @@ const Header = () => {
             <Link to={"/"} className="h-full flex items-center justify-center">
               <img
                 src={logo}
-                width={250}
+                width={200}
                 height={50}
                 alt="logo"
                 className="hidden lg:block"
@@ -51,9 +51,9 @@ const Header = () => {
             </button>
 
             {/* desktop version shows cart and login */}
-            <div className="hidden lg:flex items-center gap-10">
-              <button onClick={redirectToLoginPage} className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-md px-8 py-3 font-bold">Login</button>
-              <button className="flex items-center gap-2 bg-green-600 hover:bg-green-700 rounded-md px-3 py-3 text-white font-bold">
+            <div className="hidden lg:flex items-center gap-2">
+              <button onClick={redirectToLoginPage} className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-md px-7 py-2 font-bold">Login</button>
+              <button className="flex items-center gap-2 bg-green-600 hover:bg-green-700 rounded-md px-2 py-2 text-white font-bold">
                 {/* add to cart icon */}
                 <div className="animate-bounce ">
                   <TiShoppingCart size={24} />
