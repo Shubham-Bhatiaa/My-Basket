@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-
+import Axios from "../utils/Axios";
+import SummaryApi from "../common/SummaryApi";
+import AxiosToastError from "../utils/AxiosToastError";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [data, setData] = useState({
@@ -13,6 +16,7 @@ const Register = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -28,19 +32,39 @@ const Register = () => {
   const handleShowConfirmPassword = () => {
     setShowConfirmPassword((prev) => !prev);
   };
-  const handleSubmit=(e)=>{
-    e.preventDefault()
+  const handleSubmit = async(e) => {
+    e.preventDefault();
 
-    if(data.password !== data.confirmPassword){
-       toast.error(
-        "Password and Confirm Password must be same"
-       )
-       return
+    if (data.password !== data.confirmPassword) {
+      toast.error("Password and Confirm Password must be same");
+      return;
     }
-  }
+    try {
+      const response = await Axios({
+        ...SummaryApi.register,
+        data: data
+      });
+      if(response.data.error){
+        toast.error(response.data.message)
+      }
+      if (response.data.success) {
+        toast.success(response.data.message);
+        setData({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: ""
+        })
+        navigate("/login")
+      }
+      console.log(response)
+    } catch (error) {
+      AxiosToastError(error)
+    }
+    
+  };
 
-  const validateData = Object.values(data).every(elem=>elem)
-
+  const validateData = Object.values(data).every((elem) => elem);
 
   return (
     <section className="w-full rounded-2xl container mx-auto px-2">
@@ -91,7 +115,7 @@ const Register = () => {
               <button
                 onClick={(e) => {
                   handleShowPassword();
-                   e.preventDefault();
+                  e.preventDefault();
                 }}
                 className="p-1"
               >
@@ -113,7 +137,7 @@ const Register = () => {
               <button
                 onClick={(e) => {
                   handleShowConfirmPassword();
-                   e.preventDefault();
+                  e.preventDefault();
                 }}
                 className="p-1"
               >
@@ -125,10 +149,20 @@ const Register = () => {
               </button>
             </div>
           </div>
-          <button disabled={!validateData} className={ `${validateData?"bg-green-600 hover:bg-green-700 hover: cursor-pointer":"bg-gray-500 hover:cursor-not-allowed"} text-white p-2 rounded-lg my-3  `}>
+          <button
+            disabled={!validateData}
+            className={`${
+              validateData
+                ? "bg-green-600 hover:bg-green-700 hover: cursor-pointer"
+                : "bg-gray-500 hover:cursor-not-allowed"
+            } text-white p-2 rounded-lg my-3  `}
+          >
             Register
           </button>
         </form>
+        <div className="mt-2"><p>
+          Already have an account?<Link to={"/login"} className="bg-blue-500 text-white py-1 px-4 rounded-md mx-1 font-semibold text-md">Login</Link>
+          </p></div>
       </div>
     </section>
   );

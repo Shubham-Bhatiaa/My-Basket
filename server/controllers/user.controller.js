@@ -16,7 +16,7 @@ export async function registerUserController(req,res){
         const {name,email,password} = req.body
  
         if(!name || !email || !password){
-            return res.json({
+            return res.status(400).json({
                 message: "Provide email, name and password",
                 error: true,
                 success: false
@@ -25,7 +25,7 @@ export async function registerUserController(req,res){
 
         const user = await UserModel.findOne({email})
         if(user){
-            return res.json({
+            return res.status(400).json({
                 message:"Already registered Email",
                 error:true,
                 success:false

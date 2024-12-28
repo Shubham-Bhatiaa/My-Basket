@@ -8,11 +8,26 @@ const App = () => {
   return (
     <>
       <Header />
-      <main className='min-h-[80vh]'>
+      <main className="min-h-[80vh]">
         <Outlet />
       </main>
-      <Footer/>
-      <Toaster/>
+      <Footer />
+      <Toaster
+        toastOptions={{
+          error: {
+            style: {
+              color: "#333", // Darker text color
+              fontWeight: "bold" 
+            }
+          },
+          success: {
+            style: {
+              color: "#333", // Darker text color
+              fontWeight: "bold" 
+            }
+          }
+        }}
+      />
     </>
   );
 }
