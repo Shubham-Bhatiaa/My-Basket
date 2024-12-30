@@ -11,6 +11,7 @@ const ResetPassword = () => {
     const location = useLocation()
     const navigate = useNavigate()
     const [data,setData] = useState({
+        email:"",
         newPassword:"",
         confirmPassword:""
     })
@@ -64,6 +65,7 @@ const ResetPassword = () => {
             state: data
           });
           setData({
+            email:"",
             newPassword: "",
             confirmPassword: ""
           });
@@ -117,7 +119,7 @@ const ResetPassword = () => {
                 className="bg-white p-2 rounded-lg w-5/6 outline-none"
                 id="confirmPassword"
                 autoComplete="off"
-                value={data.confirmNewPassword}
+                value={data.confirmPassword}
                 onChange={handleChange}
               />
               <button

@@ -37,6 +37,8 @@ const Login = () => {
         toast.error(response.data.message);
       }
       if (response.data.success) {
+        localStorage.setItem("accessToken", response.data.data.accessToken)
+        localStorage.setItem("refreshToken", response.data.data.refreshToken)
         toast.success(response.data.message);
         setData({
           email: "",
