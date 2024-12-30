@@ -16,7 +16,7 @@ const Register = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -32,7 +32,7 @@ const Register = () => {
   const handleShowConfirmPassword = () => {
     setShowConfirmPassword((prev) => !prev);
   };
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (data.password !== data.confirmPassword) {
@@ -44,8 +44,8 @@ const Register = () => {
         ...SummaryApi.register,
         data: data
       });
-      if(response.data.error){
-        toast.error(response.data.message)
+      if (response.data.error) {
+        toast.error(response.data.message);
       }
       if (response.data.success) {
         toast.success(response.data.message);
@@ -54,14 +54,13 @@ const Register = () => {
           email: "",
           password: "",
           confirmPassword: ""
-        })
-        navigate("/login")
+        });
+        navigate("/login");
       }
-      console.log(response)
+      console.log(response);
     } catch (error) {
-      AxiosToastError(error)
+      AxiosToastError(error);
     }
-    
   };
 
   const validateData = Object.values(data).every((elem) => elem);
@@ -160,9 +159,17 @@ const Register = () => {
             Register
           </button>
         </form>
-        <div className="mt-2"><p>
-          Already have an account?<Link to={"/login"} className="bg-blue-500 text-white py-1 px-4 rounded-md mx-1 font-semibold text-md">Login</Link>
-          </p></div>
+        <div className="my-2 ">
+          <p>
+            Already have an account?
+            <Link
+              to={"/login"}
+              className="bg-blue-600 text-white py-1 px-4 rounded-md mx-1 font-semibold text-md"
+            >
+              Login
+            </Link>
+          </p>
+        </div>
       </div>
     </section>
   );

@@ -8,7 +8,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <main className="min-h-[80vh]">
+      <main className="min-h-[80vh] flex items-center">
         <Outlet />
       </main>
       <Footer />

@@ -113,12 +113,12 @@ const Login = () => {
             Login
           </button>
         </form>
-        <div className="mt-2 text-sm">
+        <div className="mt-2 text-sm my-4">
           <p>
             Don't have an account?
             <Link
               to={"/register"}
-              className="bg-blue-500 mx-2 text-white py-1 px-4 rounded-md font-semibold text-md"
+              className="bg-blue-600 mx-2 text-white py-1 px-4 rounded-md font-semibold text-md"
             >
               Register
             </Link>

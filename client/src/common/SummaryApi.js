@@ -1,4 +1,4 @@
-export const baseURL = "http://localhost:8080"
+export const baseURL = "http://localhost:8080";
 
 const SummaryApi = {
   register: {
@@ -13,10 +13,14 @@ const SummaryApi = {
     url: "/api/user/forgot-password",
     method: "put"
   },
- verify_forgot_password_otp: {
+  verify_forgot_password_otp: {
     url: "/api/user/verify-forgot-password-otp",
+    method: "put"
+  },
+  reset_password: {
+    url: "/api/user/reset-password",
     method: "put"
   }
 };
 
-export default SummaryApi
+export default SummaryApi;
